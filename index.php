@@ -18,7 +18,9 @@ try {
 
 $articleManager = new ArticleManager($pdo);
 
-var_dump($articleManager->findAll());
+var_dump($articleManager->find(1));
+
+//var_dump($articleManager->findAll());
 
 $article = new Article(array(
     'id'        => 1,

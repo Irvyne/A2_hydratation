@@ -13,7 +13,8 @@ class ArticleManager
     }
 
     public function add(Article $article) {
-
+        $sql = "INSERT INTO article (id, title, content) VALUES (NULL, ".$this->pdo->quote($article->getTitle()).", ".$this->pdo->quote($article->getContent()).")";
+        return $this->pdo->query($sql);
     }
 
     public function findAll() {
@@ -24,7 +25,10 @@ class ArticleManager
     }
 
     public function find($id) {
-
+        $sql = "SELECT * FROM article WHERE id = ".$this->pdo->quote($id, PDO::PARAM_INT);
+        $query = $this->pdo->query($sql);
+        $article = $query->fetch(PDO::FETCH_ASSOC);
+        return $article;
     }
 
     public function update(Article $article) {
