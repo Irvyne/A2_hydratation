@@ -16,9 +16,29 @@ try {
     exit('Erreur de connexion BDD');
 }
 
+$article = new Article(array(
+    'title'     => 'AAAAAAAAA',
+    'content'   => 'CCCCCCCC',
+));
+
 $articleManager = new ArticleManager($pdo);
 
-var_dump($articleManager->find(1));
+$article = $articleManager->find(2);
+
+$article->setTitle('Nouveau Titre');
+$article->setContent('Nouveau Contenu');
+
+$articleManager->update($article);
+
+
+if ($article = $articleManager->add($article)) {
+    //var_dump($article);
+} else {
+    echo 'Erreur lors de l\'insert';
+}
+
+
+//var_dump($articleManager->find(1));
 
 //var_dump($articleManager->findAll());
 
@@ -30,4 +50,4 @@ $article = new Article(array(
 
 
 
-var_dump($article);
+//var_dump($article);
